@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="Minder" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="Minder" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="Minder" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<base href="/">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>My Library :: Texas A&amp;M Libraries</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="resources/images/favicon.ico" type="image/x-icon" />
+
+
+	<link rel="stylesheet" href="resources/styles/vendor/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/styles/vendor/bootstrap/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="resources/styles/app.css">
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+
+	<script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+	
+</head>
+<body>
+	<!--[if lt IE 7]>
+    	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+
+	<!-- Content placed here will appear on every page -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          	<a class="navbar-brand" href="/minder">MINDER</a>
+          	<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">File <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Action</a></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Separated link</a></li>
+						<li class="divider"></li>
+						<li><a href="#">One more separated link</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Preferences <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Action</a></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Separated link</a></li>
+						<li class="divider"></li>
+						<li><a href="#">One more separated link</a></li>
+					</ul>
+				</li>
+			</ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+	    <ul ng-controller="MenuController" class="nav nav-pills">
+			<li role="presentation" ng-class="{'active' : isActive('/clients')||isActive('index')}"><a href="clients">Clients</a></li>
+			<li role="presentation" ng-class="{'active' : isActive('/products')}"><a href="products">Products</a></li>
+			<li role="presentation" ng-class="{'active' : isActive('/reminders')}"><a href="reminders">Reminders</a></li>
+		</ul>
+
+
+		<div ng-view></div>
+	</div>
+
+
+	<footer style="margin-left:20px;">
+	</footer>
+
+
+	<!-- In production use: <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script> -->
+
+	
+	<!-- Bower component -->
+	<script src="resources/scripts/vendor/jquery-1.11.2.min.js"></script>
+	<script src="resources/scripts/vendor/bootstrap.min.js"></script>
+		
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+	<script src="bower_components/angular-loader/angular-loader.js"></script>
+	<script src="bower_components/angular-mocks/angular-mocks.js"></script>
+	
+	
+	<!-- Modules -->
+	<script src="components/version/version.js"></script>
+	<script src="components/version/version-directive.js"></script>
+	<script src="components/version/interpolate-filter.js"></script>
+	
+	
+	<!-- build:js resources/scripts/vendor_concat.js -->
+	<!--  Vendor libraries -->
+	<script src="resources/scripts/vendor/stomp.js"></script>
+	<script src="resources/scripts/vendor/sockjs-0.3.4.js"></script>
+
+	<!-- endbuild -->
+	
+
+	<!-- build:js resources/scripts/app_concat.js -->
+	
+    <!-- Configuration -->
+    <script src="config/appConfig.js"></script>
+
+    <!-- Application Start -->
+    <script src="setup.js"></script>
+    <script src="app.js"></script>
+    <script src="config/logging.js"></script>
+    <script src="config/runTime.js"></script>
+    <script src="config/routes.js"></script>
+
+    <!-- Directives -->
+    <script src="directives/userDirective.js"></script>
+
+    <!-- Services -->
+
+    <!-- Factories -->
+
+    <!-- Models -->
+    <script src="model/abstractModel.js"></script>
+    <script src="model/userModel.js"></script>
+    <script src="model/clientsModel.js"></script>
+
+    <!-- Controllers -->
+    <script src="controllers/userController.js"></script>
+    <script src="controllers/menuController.js"></script>
+    <script src="controllers/clientController.js"></script>
+    
+    <!-- endbuild -->
+
+	
+	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+	<script>
+		(function(b, o, i, l, e, r) {
+			b.GoogleAnalyticsObject = l;
+			b[l] || (b[l] = function() {
+				(b[l].q = b[l].q || []).push(arguments)
+			});
+			b[l].l = +new Date;
+			e = o.createElement(i);
+			r = o.getElementsByTagName(i)[0];
+			e.src = '//www.google-analytics.com/analytics.js';
+			r.parentNode.insertBefore(e, r)
+		}(window, document, 'script', 'ga'));
+		ga('create', 'UA-XXXXX-X');
+		ga('send', 'pageview');
+	</script>
+
+	
+</body>
+</html>

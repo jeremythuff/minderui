@@ -1,0 +1,36 @@
+<div ng-controller="ClientController">
+	<h2>CLIENTS</h2>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">Current Clients<button class="pull-right btn btn-xs btn-success">ADD NEW</button></div>
+		<table class="table">
+			<thead>
+	          	<tr>
+					<th>ID</th>
+					<th>NAME</th>
+					<th>EMAIL</th>
+					<th>PHONE</th>
+					<th>LOCATION</th>
+					<th>NOTES</th>
+					<th></th>
+				</tr>
+	        </thead>
+	        <tbody>
+				<tr ng-repeat="client in clients" ng-show="!$last">
+					<th scope="row">{{client.id }}</th>
+					<td>{{client.name}}</td>
+					<td>{{client.email}}</td>
+					<td>{{client.phoneNumber}}</td>
+					<td>{{client.location}}</td>
+					<td>{{client.notes}}</td>
+					<td>
+						<button class="btn btn-xs btn-warning">E</button>
+						<button class="btn btn-xs btn-danger">X</button>
+					</td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+
+</div>
