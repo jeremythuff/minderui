@@ -2,7 +2,7 @@
 	<h2>CLIENTS</h2>
 
 	<div class="panel panel-default">
-		<div class="panel-heading">Current Clients<button class="pull-right btn btn-xs btn-success">ADD NEW</button></div>
+		<div class="panel-heading">Current Clients<button ng-click="addNew()" class="pull-right btn btn-xs btn-success">ADD NEW</button></div>
 		<table class="table">
 			<thead>
 	          	<tr>
@@ -13,19 +13,39 @@
 					<th>LOCATION</th>
 					<th>NOTES</th>
 					<th></th>
+					<th></th>
 				</tr>
 	        </thead>
 	        <tbody>
-				<tr ng-repeat="client in clients" ng-show="!$last">
-					<th scope="row">{{client.id }}</th>
-					<td>{{client.name}}</td>
-					<td>{{client.email}}</td>
-					<td>{{client.phoneNumber}}</td>
-					<td>{{client.location}}</td>
-					<td>{{client.notes}}</td>
+				<tr ng-repeat="client in clients.list | orderBy:'id'">
+					<th scope="row"><a href="client/{{client.id}}">{{client.id }}</a></th>
+					<td ng-click="editing = true">
+						<span ng-hide="editing">{{client.name}}</span>
+						<input type="text" placeholder="input name" ng-show="editing" ng-model="client.name" />
+					</td>
+					<td ng-click="editing = true">
+						<span ng-hide="editing">{{client.email}}</span>
+						<input type="text" placeholder="input email" ng-show="editing" ng-model="client.email" />
+					</td>
+					<td ng-click="editing = true">
+						<span ng-hide="editing">{{client.phoneNumber}}</span>
+						<input type="text" placeholder="input phone number" ng-show="editing" ng-model="client.phoneNumber" />
+					</td>
+					<td ng-click="editing = true">
+						<span ng-hide="editing">{{client.location}}</span>
+						<input type="text" placeholder="input location" ng-show="editing" ng-model="client.location" />
+					</td>
+					<td ng-click="editing = true">
+						<span ng-hide="editing">{{client.notes}}</span>
+						<input type="text" placeholder="input notes" ng-show="editing" ng-model="client.notes" />
+					</td>
 					<td>
-						<button class="btn btn-xs btn-warning">E</button>
-						<button class="btn btn-xs btn-danger">X</button>
+						<a class="btn btn-xs btn-info" href="client/{{client.id}}"><span class="glyphicon glyphicon-search" ></span> view</a>
+					</td>
+					<td>
+						<button class="btn btn-xs btn-warning" ng-click="editing = true" ng-hide="editing"><span class="glyphicon glyphicon-pencil" ></span></button>
+						<button class="btn btn-xs btn-success" ng-click="editing = false; update(client)" ng-show="editing"><span class="glyphicon glyphicon-ok" ></span></button>
+						<button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#myModal" ng-click="setDeleteId(client.id)"><span class="glyphicon glyphicon-remove" ></span></button>
 					</td>
 				</tr>
 			</tbody>
@@ -33,4 +53,12 @@
 		</table>
 	</div>
 
+	<modal 
+		click-call="delete" 
+		title-text="Confirm Delete?" 
+		btn-view="view/deleteModalBtn.html">
+		Are you sure you want to delete this client?
+	</modal>
+
 </div>
+

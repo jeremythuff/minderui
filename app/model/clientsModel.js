@@ -7,7 +7,7 @@ Minder.service("Clients", function($http, AbstractModel) {
 		//This causes our model to extend AbstractModel
 		angular.extend(self, AbstractModel);
 		
-		self.unwrap(self, futureData, "ArrayList<ClientImpl>");
+		self.unwrap(self, futureData, "HashMap");
 		
 	};
 
@@ -17,14 +17,15 @@ Minder.service("Clients", function($http, AbstractModel) {
 		self.unwrap(self, data);
 	};
 
-	Clients.get = function(action) {
-
-		if(Clients.data && !action) return Clients.data;
-
+	Clients.get = function() {
 		var newClientsPromise = $http.get("http://localhost:9000/rest/client/list");
-
 		Clients.data = new Clients(newClientsPromise);	
 		return Clients.data;
+	};
+
+	Clients.getById = function(id) {
+
+		return $http.get("http://localhost:9000/rest/client/"+id);
 	
 	};
 		

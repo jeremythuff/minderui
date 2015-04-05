@@ -1,0 +1,24 @@
+<div ng-controller="ClientController">
+
+<a class="btn btn-info btn-xs" href="/clients"><span class="glyphicon glyphicon-level-up" ></span> clients</a>
+
+<h1>{{client.name}}</h1>
+<hr>
+
+<div class="row">
+	<div class="col-md-6">
+		<ul class="list-unstyled">
+			<li> <span class="label label-primary">EMAIL:</span> {{client.email}} </li>
+			<li> <span class="label label-primary">PHONE:</span> {{client.phoneNumber}} </li>
+			<li> <span class="label label-primary">EMAIL:</span> {{client.location}} </li>
+		</ul>
+	</div>
+	<div class="col-md-6">
+		<p class="label label-primary">NOTES:</p>
+		<br><br>
+		<textarea>{{client.notes}}</textarea>
+	</div>
+
+</div>
+
+</div>

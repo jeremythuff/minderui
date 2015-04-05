@@ -5,6 +5,9 @@ Minder.config(['$routeProvider', '$locationProvider', function($routeProvider, $
 		when('/clients', {
 			templateUrl: 'view/clients.html'
 		}).
+		when('/client/:id', {
+			templateUrl: 'view/client.html'
+		}).
 		when('/products', {
 			templateUrl: 'view/products.html'
 		}).

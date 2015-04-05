@@ -36,25 +36,29 @@
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">File <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
+						<li><a href="#">New Client</a></li>
+						<li><a href="#">New Product</a></li>
+						<li><a href="#">New Reminder</a></li>
 						<li class="divider"></li>
-						<li><a href="#">Separated link</a></li>
-						<li class="divider"></li>
-						<li><a href="#">One more separated link</a></li>
+						<li><a href="#">Exit</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Preferences <span class="caret"></span></a>
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Settings <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
+						<li><a href="#">Administration</a></li>
+						<li><a href="#">Account Settings</a></li>
 						<li class="divider"></li>
-						<li><a href="#">Separated link</a></li>
+						<li><a href="#">Preferences</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Documentation</a></li>
+						<li><a href="#">Contact Developers</a></li>
 						<li class="divider"></li>
-						<li><a href="#">One more separated link</a></li>
+						<li><a href="#">About Minder</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -63,15 +67,15 @@
     </nav>
 
     <div class="container">
-	    <ul ng-controller="MenuController" class="nav nav-pills">
+	    <ul ng-controller="MenuController" class="nav nav-pills" ng-hide="isActive('/client/')">
 			<li role="presentation" ng-class="{'active' : isActive('/clients')||isActive('index')}"><a href="clients">Clients</a></li>
 			<li role="presentation" ng-class="{'active' : isActive('/products')}"><a href="products">Products</a></li>
 			<li role="presentation" ng-class="{'active' : isActive('/reminders')}"><a href="reminders">Reminders</a></li>
 		</ul>
-
-
 		<div ng-view></div>
 	</div>
+
+
 
 
 	<footer style="margin-left:20px;">
@@ -120,6 +124,7 @@
 
     <!-- Directives -->
     <script src="directives/userDirective.js"></script>
+    <script src="directives/modalDirective.js"></script>
 
     <!-- Services -->
 
@@ -129,6 +134,7 @@
     <script src="model/abstractModel.js"></script>
     <script src="model/userModel.js"></script>
     <script src="model/clientsModel.js"></script>
+    <script src="model/clientModel.js"></script>
 
     <!-- Controllers -->
     <script src="controllers/userController.js"></script>
