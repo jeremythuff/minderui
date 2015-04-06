@@ -3,10 +3,11 @@ Minder.directive('modal', function () {
 		templateUrl: 'view/modal.html',
 		restrict: 'E',
 		transclude: true,
-		scope: false,
+		scope: true,
 		controller: "",
 		link: function ($scope, element, attr) {
 	    	$scope.modal = {
+	    		id: attr["modalId"],
 	    		title: attr["titleText"],
 	    		btnView: attr["btnView"]
 	    	}

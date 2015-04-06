@@ -2,7 +2,43 @@
 	<h2>CLIENTS</h2>
 
 	<div class="panel panel-default">
-		<div class="panel-heading">Current Clients<button ng-click="addNew()" class="pull-right btn btn-xs btn-success">ADD NEW</button></div>
+		<div class="panel-heading">
+			<span>Current Clients</span>
+			<button  class="pull-right btn btn-xs btn-success" data-toggle="modal" data-target="#newModal">ADD NEW</button>
+			<modal 
+				modal-id="newModal"
+				click-call="addNew" 
+				title-text="Create Client?" 
+				btn-view="view/addNewModalBtn.html">
+				
+				<h3>New Client</h3>
+
+				<form class="creatClientForm form-horizontal">
+					<div class="form-group">
+						<label for="clientInputName">Client Name:</label>
+						<input type="name" class="form-control" id="clientInputName" placeholder="Enter Client Name" ng-model="newClient.name">
+					</div>
+					<div class="form-group">
+						<label for="clientInputEmail">Email Address:</label>
+						<input type="email" class="form-control" id="clientInputEmail" placeholder="Enter Email Address" ng-model="newClient.email">
+					</div>
+					<div class="form-group">
+						<label for="clientInputPhone">Phone Number:</label>
+						<input type="phone" class="form-control" id="clientInputPhone" placeholder="Enter Phone Number" ng-model="newClient.phoneNumber">
+					</div>
+					<div class="form-group">
+						<label for="clientInputLocation">Location:</label>
+						<input type="address" class="form-control" id="clientInputLocation" placeholder="Enter Physical Address" ng-model="newClient.location">
+					</div>
+					<div class="form-group">
+						<label for="clientInputNotes">Notes:</label>
+						<textarea id="clientInputNotes" class="form-control" rows="3" ng-model="newClient.notes"></textarea>
+					</div>
+				</form>
+
+			</modal>
+
+		</div>
 		<table class="table">
 			<thead>
 	          	<tr>
@@ -13,39 +49,36 @@
 					<th>LOCATION</th>
 					<th>NOTES</th>
 					<th></th>
-					<th></th>
 				</tr>
 	        </thead>
 	        <tbody>
 				<tr ng-repeat="client in clients.list | orderBy:'id'">
 					<th scope="row"><a href="client/{{client.id}}">{{client.id }}</a></th>
-					<td ng-click="editing = true">
-						<span ng-hide="editing">{{client.name}}</span>
-						<input type="text" placeholder="input name" ng-show="editing" ng-model="client.name" />
+					<td ng-dblclick="editingName = true">
+						<span ng-hide="editingName">{{client.name}}</span>
+						<input type="text" placeholder="input name" ng-show="editingName" ng-model="client.name" class="form-control" ng-blur="editingName = false; update(client);" />
 					</td>
-					<td ng-click="editing = true">
-						<span ng-hide="editing">{{client.email}}</span>
-						<input type="text" placeholder="input email" ng-show="editing" ng-model="client.email" />
+					<td ng-dblclick="editingEmail = true">
+						<span ng-hide="editingEmail">{{client.email}}</span>
+						<input type="text" placeholder="input email" ng-show="editingEmail" ng-model="client.email" class="form-control" ng-blur="editingEmail = false; update(client);" />
 					</td>
-					<td ng-click="editing = true">
-						<span ng-hide="editing">{{client.phoneNumber}}</span>
-						<input type="text" placeholder="input phone number" ng-show="editing" ng-model="client.phoneNumber" />
+					<td ng-dblclick="editingPhone = true">
+						<span ng-hide="editingPhone">{{client.phoneNumber}}</span>
+						<input type="text" placeholder="input phone number" ng-show="editingPhone" ng-model="client.phoneNumber" class="form-control" ng-blur="editingPhone = false; update(client);" />
 					</td>
-					<td ng-click="editing = true">
-						<span ng-hide="editing">{{client.location}}</span>
-						<input type="text" placeholder="input location" ng-show="editing" ng-model="client.location" />
+					<td ng-dblclick="editingLocation = true">
+						<span ng-hide="editingLocation">{{client.location}}</span>
+						<input type="text" placeholder="input location" ng-show="editingLocation" ng-model="client.location" class="form-control" ng-blur="editingLocation = false; update(client);" />
 					</td>
-					<td ng-click="editing = true">
-						<span ng-hide="editing">{{client.notes}}</span>
-						<input type="text" placeholder="input notes" ng-show="editing" ng-model="client.notes" />
+					<td ng-dblclick="editingNotes = true">
+						<span ng-hide="editingNotes">{{client.notes}}</span>
+						<input type="text" placeholder="input notes" ng-show="editingNotes" ng-model="client.notes" class="form-control" ng-blur="editingNotes = false; update(client);" />
 					</td>
-					<td>
-						<a class="btn btn-xs btn-info" href="client/{{client.id}}"><span class="glyphicon glyphicon-search" ></span> view</a>
-					</td>
-					<td>
+					<td class="tableActions">
+						<a class="btn btn-xs btn-info" href="client/{{client.id}}" ng-hide="editing"><span class="glyphicon glyphicon-search"></span></a>
 						<button class="btn btn-xs btn-warning" ng-click="editing = true" ng-hide="editing"><span class="glyphicon glyphicon-pencil" ></span></button>
 						<button class="btn btn-xs btn-success" ng-click="editing = false; update(client)" ng-show="editing"><span class="glyphicon glyphicon-ok" ></span></button>
-						<button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#myModal" ng-click="setDeleteId(client.id)"><span class="glyphicon glyphicon-remove" ></span></button>
+						<button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" ng-click="setDeleteId(client.id)" ng-hide="editing"><span class="glyphicon glyphicon-remove" ></span></button>
 					</td>
 				</tr>
 			</tbody>
@@ -54,6 +87,7 @@
 	</div>
 
 	<modal 
+		modal-id="deleteModal" 
 		click-call="delete" 
 		title-text="Confirm Delete?" 
 		btn-view="view/deleteModalBtn.html">

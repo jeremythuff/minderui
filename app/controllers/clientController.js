@@ -1,11 +1,21 @@
 Minder.controller('ClientController', function ($scope, Clients, Client, $http, $routeParams, $rootScope) {
 	$scope.clients = Clients.get();
 	$scope.client = Client.getById($routeParams.id);
+	$scope.newClient = {};
 
 	$scope.addNew = function() {
-		$http.get("http://localhost:9000/rest/client/create")
+
+		var url = "http://localhost:9000/rest/client/create?";
+		url += "name="+$scope.newClient.name+"&";
+		url += "email="+$scope.newClient.email+"&";
+		url += "phonenumber="+$scope.newClient.phoneNumber+"&";
+		url += "location="+$scope.newClient.location+"&";
+		url += "notes="+$scope.newClient.notes;
+
+		$http.get(url)
 		.success(function(res) {
 			$scope.clients = Clients.get();
+			$scope.newClient = {};
 		}); 
 	}
 
