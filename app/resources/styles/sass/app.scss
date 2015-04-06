@@ -7,5 +7,16 @@ body {
 }
 
 .tableActions {
-	min-width: 150px;
+	display:table-row;
+	min-width: 15%;
+	max-width: 15%;
+}
+
+.tableActions a,
+.tableActions button {
+	margin: 5px 2px;
+}
+
+.creatClientForm {
+	padding: 15px;
 }

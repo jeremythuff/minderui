@@ -76,7 +76,7 @@
 					</td>
 					<td class="tableActions">
 						<a class="btn btn-xs btn-info" href="client/{{client.id}}" ng-hide="editing"><span class="glyphicon glyphicon-search"></span></a>
-						<button class="btn btn-xs btn-warning" ng-click="editing = true" ng-hide="editing"><span class="glyphicon glyphicon-pencil" ></span></button>
+						<button class="btn btn-xs btn-warning" ng-hide="editing" data-toggle="modal" data-target="#editModal" ng-click="setUpdateClient(client)"><span class="glyphicon glyphicon-pencil" ></span></button>
 						<button class="btn btn-xs btn-success" ng-click="editing = false; update(client)" ng-show="editing"><span class="glyphicon glyphicon-ok" ></span></button>
 						<button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" ng-click="setDeleteId(client.id)" ng-hide="editing"><span class="glyphicon glyphicon-remove" ></span></button>
 					</td>
@@ -92,6 +92,40 @@
 		title-text="Confirm Delete?" 
 		btn-view="view/deleteModalBtn.html">
 		Are you sure you want to delete this client?
+	</modal>
+
+	<modal 
+		modal-id="editModal" 
+		click-call="update" 
+		title-text="Update Client?" 
+		btn-view="view/editModalBtn.html">
+
+
+		<h3>Update Client</h3>
+
+		<form class="creatClientForm form-horizontal">
+			<div class="form-group">
+				<label for="clientInputName">Client Name:</label>
+				<input type="name" class="form-control" id="clientInputName" value="updateClient.name" placeholder="Enter Client Name" ng-model="updateClient.name" />
+			</div>
+			<div class="form-group">
+				<label for="clientInputEmail">Email Address:</label>
+				<input type="email" class="form-control" id="clientInputEmail" placeholder="Enter Email Address" ng-model="updateClient.email" value="updateClient.email" />
+			</div>
+			<div class="form-group">
+				<label for="clientInputPhone">Phone Number:</label>
+				<input type="phone" class="form-control" id="clientInputPhone" placeholder="Enter Phone Number" ng-model="updateClient.phoneNumber" value="updateClient.phoneNumber" />
+			</div>
+			<div class="form-group">
+				<label for="clientInputLocation">Location:</label>
+				<input type="address" class="form-control" id="clientInputLocation" placeholder="Enter Physical Address" ng-model="updateClient.location" value="updateClient.location" />
+			</div>
+			<div class="form-group">
+				<label for="clientInputNotes">Notes:</label>
+				<textarea id="clientInputNotes" class="form-control" rows="3" ng-model="updateClient.notes">{{updateClient.notes}}</textarea>
+			</div>
+		</form>
+		
 	</modal>
 
 </div>

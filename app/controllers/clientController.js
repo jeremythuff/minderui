@@ -37,7 +37,10 @@ Minder.controller('ClientController', function ($scope, Clients, Client, $http, 
 
 	$scope.setDeleteId = function(id) {
 		$scope.deleteId = id;
-		console.log($scope.deleteId );
+	}
+
+	$scope.setUpdateClient = function(client) {
+		$scope.updateClient = client;
 	}
 
 	$scope.delete = function(id) {
