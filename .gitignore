@@ -12,3 +12,4 @@ npm-debug.log
 .sass-cache/
 app/resources/styles/*
 !app/resources/styles/sass/
+!app/resources/styles/vendor
