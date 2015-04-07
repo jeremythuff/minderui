@@ -47,7 +47,7 @@
 					<th>EMAIL</th>
 					<th>PHONE</th>
 					<th>LOCATION</th>
-					<th>NOTES</th>
+					<th class="text-center">PRODUCTS</th>
 					<th></th>
 				</tr>
 	        </thead>
@@ -70,9 +70,8 @@
 						<span ng-hide="editingLocation">{{client.location}}</span>
 						<input type="text" placeholder="input location" ng-show="editingLocation" ng-model="client.location" class="form-control" ng-blur="editingLocation = false; update(client);" />
 					</td>
-					<td ng-dblclick="editingNotes = true">
-						<span ng-hide="editingNotes">{{client.notes}}</span>
-						<input type="text" placeholder="input notes" ng-show="editingNotes" ng-model="client.notes" class="form-control" ng-blur="editingNotes = false; update(client);" />
+					<td class="text-center">
+						<a href="" data-toggle="modal" data-target="#addProductsModal">{{client.allProducts.length}}</a>
 					</td>
 					<td class="tableActions">
 						<a class="btn btn-xs btn-info" href="client/{{client.id}}" ng-hide="editing"><span class="glyphicon glyphicon-search"></span></a>
@@ -85,12 +84,15 @@
 		</table>
 	</div>
 
+
+
 	<modal 
-		modal-id="deleteModal" 
-		click-call="delete" 
-		title-text="Confirm Delete?" 
-		btn-view="view/deleteModalBtn.html">
-		Are you sure you want to delete this client?
+		modal-id="addProductsModal" 
+		click-call="addProduct" 
+		title-text="Add a product">
+		
+		
+		
 	</modal>
 
 	<modal 
