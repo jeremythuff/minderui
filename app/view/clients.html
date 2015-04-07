@@ -77,7 +77,6 @@
 					<td class="tableActions">
 						<a class="btn btn-xs btn-info" href="client/{{client.id}}" ng-hide="editing"><span class="glyphicon glyphicon-search"></span></a>
 						<button class="btn btn-xs btn-warning" ng-hide="editing" data-toggle="modal" data-target="#editModal" ng-click="setUpdateClient(client)"><span class="glyphicon glyphicon-pencil" ></span></button>
-						<button class="btn btn-xs btn-success" ng-click="editing = false; update(client)" ng-show="editing"><span class="glyphicon glyphicon-ok" ></span></button>
 						<button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" ng-click="setDeleteId(client.id)" ng-hide="editing"><span class="glyphicon glyphicon-remove" ></span></button>
 					</td>
 				</tr>
@@ -99,7 +98,6 @@
 		click-call="update" 
 		title-text="Update Client?" 
 		btn-view="view/editModalBtn.html">
-
 
 		<h3>Update Client</h3>
 

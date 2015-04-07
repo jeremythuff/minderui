@@ -5,7 +5,7 @@ Minder.controller('ClientController', function ($scope, Clients, Client, $http, 
 
 	$scope.addNew = function() {
 
-		var url = "http://localhost:9000/rest/client/create?";
+		var url = globalConfig.webService+"/rest/client/create?";
 		url += "name="+$scope.newClient.name+"&";
 		url += "email="+$scope.newClient.email+"&";
 		url += "phonenumber="+$scope.newClient.phoneNumber+"&";
@@ -21,7 +21,7 @@ Minder.controller('ClientController', function ($scope, Clients, Client, $http, 
 
 	$scope.update = function(client) {
 		
-		var url = "http://localhost:9000/rest/client/"+client.id+"/update?";
+		var url = globalConfig.webService+"/rest/client/"+client.id+"/update?";
 		url += "name="+client.name+"&";
 		url += "email="+client.email+"&";
 		url += "phonenumber="+client.phoneNumber+"&";
@@ -44,7 +44,7 @@ Minder.controller('ClientController', function ($scope, Clients, Client, $http, 
 	}
 
 	$scope.delete = function(id) {
-		$http.get("http://localhost:9000/rest/client/"+id+"/delete")
+		$http.get(globalConfig.webService+"/rest/client/"+id+"/delete")
 		.success(function(res) {
 			$scope.clients = Clients.get();
 		});

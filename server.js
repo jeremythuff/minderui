@@ -8,5 +8,5 @@ app.get('/*', function(req, res){
   res.sendFile(__dirname + '/app/index.html');
 });
 	
-app.listen(8080);
-console.log("Node Server Listening on port 8000");
+app.listen(9090);
+console.log("Node Server Listening on port 9090");
