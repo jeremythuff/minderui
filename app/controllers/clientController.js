@@ -1,7 +1,9 @@
-Minder.controller('ClientController', function ($scope, Clients, Client, $http, $routeParams, $rootScope) {
+Minder.controller('ClientController', function ($scope, Clients, Client, Products, $http, $routeParams, $rootScope) {
 	$scope.clients = Clients.get();
 	$scope.client = Client.getById($routeParams.id);
 	$scope.newClient = {};
+	$scope.editClient = {};
+	$scope.products = Products.get();
 
 	$scope.addNew = function() {
 
@@ -52,6 +54,18 @@ Minder.controller('ClientController', function ($scope, Clients, Client, $http, 
 
 	$scope.getDeleteId = function() {
 		return "hello";
+	}
+
+	$scope.setEditClient = function(client) {
+		$scope.editClient = client;
+	}
+
+	$scope.byProducts = function(candidate) {
+
+		for(key in $scope.editClient.allProducts) {
+			if (candidate.id == $scope.editClient.allProducts[key].id) return false;
+			return true;
+		}
 	}
 
 });

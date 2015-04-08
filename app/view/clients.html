@@ -71,7 +71,7 @@
 						<input type="text" placeholder="input location" ng-show="editingLocation" ng-model="client.location" class="form-control" ng-blur="editingLocation = false; update(client);" />
 					</td>
 					<td class="text-center">
-						<a href="" data-toggle="modal" data-target="#addProductsModal">{{client.allProducts.length}}</a>
+						<a href="" ng-click="setEditClient(client)" class="badge" data-toggle="modal" data-target="#addProductsModal">{{client.allProducts.length}}</a>
 					</td>
 					<td class="tableActions">
 						<a class="btn btn-xs btn-info" href="client/{{client.id}}" ng-hide="editing"><span class="glyphicon glyphicon-search"></span></a>
@@ -91,7 +91,26 @@
 		click-call="addProduct" 
 		title-text="Add a product">
 		
-		
+		<div class="row">
+			<div class="col-md-5">
+				<h4>Current Products</h4>
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="product in editClient.allProducts"><strong>{{product.name}}</strong><br><em>{{product.serial || "no serial"}}</em></li>
+				</ul>
+			</div>
+
+			<div class="col-md-2">
+				<button class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+				<button class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
+			</div>
+
+			<div class="col-md-5">
+				<h4>Available Products</h4>
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="product in products.list | filter:byProducts"><strong>{{product.name}}</strong><br>{{product.serial || "no serial"}}</li>
+				</ul>
+			</div>
+		</div>
 		
 	</modal>
 
