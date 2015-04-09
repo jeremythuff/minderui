@@ -18,9 +18,17 @@ Minder.service("Products", function($http, AbstractModel) {
 	};
 
 	Products.get = function() {
+
+		if(Products.data) return Products.data;
+		
 		var newProductsPromise = $http.get(globalConfig.webService+"/rest/product/list");
 		Products.data = new Products(newProductsPromise);	
 		return Products.data;
+	};
+
+	Products.refresh = function() {
+		Products.data = null;
+		return Products.get();
 	};
 
 	Products.getById = function(id) {

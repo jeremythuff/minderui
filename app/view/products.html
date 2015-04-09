@@ -1,1 +1,93 @@
-<h2>PRODUCTS</h2>
+<div ng-controller="ProductController">
+	<h2>CLIENTS</h2>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<span>Current Products</span>
+			<button  class="pull-right btn btn-xs btn-success" data-toggle="modal" data-target="#newProductModal">ADD NEW</button>
+		</div>
+		<table class="table">
+			<thead>
+	          	<tr>
+					<th>ID</th>
+					<th>NAME</th>
+					<th>EMAIL</th>
+					<th>PHONE</th>
+					<th>LOCATION</th>
+					<th class="text-center">REMINDER</th>
+					<th></th>
+				</tr>
+	        </thead>
+	        <tbody>
+				<tr ng-repeat="product in products.list | orderBy:'id'">
+					<th scope="row"><a href="product/{{product.id}}">{{product.id}}</a></th>
+					<td ng-dblclick="editingName = true">
+						<span ng-hide="editingName">{{product.name}}</span>
+						<input type="text" placeholder="input name" ng-show="editingName" ng-model="product.name" class="form-control" ng-blur="editingName = false; update(product);" />
+					</td>
+					<td ng-dblclick="editingEmail = true">
+						<span ng-hide="editingEmail">{{product.email}}</span>
+						<input type="text" placeholder="input email" ng-show="editingEmail" ng-model="product.email" class="form-control" ng-blur="editingEmail = false; update(product);" />
+					</td>
+					<td ng-dblclick="editingPhone = true">
+						<span ng-hide="editingPhone">{{product.phoneNumber}}</span>
+						<input type="text" placeholder="input phone number" ng-show="editingPhone" ng-model="product.phoneNumber" class="form-control" ng-blur="editingPhone = false; update(product);" />
+					</td>
+					<td ng-dblclick="editingLocation = true">
+						<span ng-hide="editingLocation">{{product.location}}</span>
+						<input type="text" placeholder="input location" ng-show="editingLocation" ng-model="product.location" class="form-control" ng-blur="editingLocation = false; update(product);" />
+					</td>
+					<td class="text-center">
+						<a href="" ng-click="setEditProduct(product)" class="badge" data-toggle="modal" data-target="#addRemindersModal">{{product.allReminders.length}}</a>
+					</td>
+					<td class="tableActions">
+						<a class="btn btn-xs btn-info" href="product/{{product.id}}"><span class="glyphicon glyphicon-search"></span></a>
+						<button class="btn btn-xs btn-warning" ng-hide="editing" data-toggle="modal" data-target="#editProductModal" ng-click="setUpdateProduct(product)"><span class="glyphicon glyphicon-pencil" ></span></button>
+						<button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteProductModal" ng-click="setDeleteId(product.id)"><span class="glyphicon glyphicon-remove" ></span></button>
+					</td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>
+
+	<modal 
+		modal-id="newProductModal"
+		click-call="addNew" 
+		title-text="Create New Product">
+
+		<!--<div ng-include src="'view/createProductModalContent.html'"></div>-->
+
+	</modal>
+
+	<modal 
+		modal-id="deleteProductModal" 
+		click-call="delete" 
+		title-text="Confirm Delete"
+		btn-view="view/deleteModalBtn.html">
+		
+		<h3>Are you sure you want to delete?</h3>
+		
+	</modal>
+
+
+	<modal 
+		modal-id="addRemindersModal" 
+		click-call="addReminder" 
+		title-text="Add a product">
+		
+		<!--<span ng-include src="'view/addRemindersModalContent.html'"></span>-->
+		
+	</modal>
+
+	<modal 
+		modal-id="editProductModal" 
+		click-call="update" 
+		title-text="Update Product" 
+		>
+
+		<!--<span ng-include src="'view/editProductModalContent.html'"></span>-->
+		
+	</modal>
+
+</div>

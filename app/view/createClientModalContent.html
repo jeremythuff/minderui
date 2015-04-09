@@ -1,0 +1,22 @@
+<form class="creatClientForm form-horizontal">
+	<div class="form-group">
+		<label for="clientInputName">Client Name:</label>
+		<input type="name" class="form-control" id="clientInputName" placeholder="Enter Client Name" ng-model="newClient.name">
+	</div>
+	<div class="form-group">
+		<label for="clientInputEmail">Email Address:</label>
+		<input type="email" class="form-control" id="clientInputEmail" placeholder="Enter Email Address" ng-model="newClient.email">
+	</div>
+	<div class="form-group">
+		<label for="clientInputPhone">Phone Number:</label>
+		<input type="phone" class="form-control" id="clientInputPhone" placeholder="Enter Phone Number" ng-model="newClient.phoneNumber">
+	</div>
+	<div class="form-group">
+		<label for="clientInputLocation">Location:</label>
+		<input type="address" class="form-control" id="clientInputLocation" placeholder="Enter Physical Address" ng-model="newClient.location">
+	</div>
+	<div class="form-group">
+		<label for="clientInputNotes">Notes:</label>
+		<textarea id="clientInputNotes" class="form-control" rows="3" ng-model="newClient.notes"></textarea>
+	</div>
+</form>

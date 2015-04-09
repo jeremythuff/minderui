@@ -18,9 +18,17 @@ Minder.service("Clients", function($http, AbstractModel) {
 	};
 
 	Clients.get = function() {
+
+		if(Clients.data) return Clients.data;
+
 		var newClientsPromise = $http.get(globalConfig.webService+"/rest/client/list");
 		Clients.data = new Clients(newClientsPromise);	
 		return Clients.data;
+	};
+
+	Clients.refresh = function() {
+		Clients.data = null;
+		return Clients.get();
 	};
 
 	Clients.getById = function(id) {

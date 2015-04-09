@@ -1,0 +1,25 @@
+<div class="row addProductModalContent">
+	<div class="col-md-6">
+		<h4>Current Products</h4>
+		<input type="text" placeholder="Filter Products" class="form-control" ng-model="addedSearch.name" />
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="product in editClient.allProducts | filter:addedSearch:strict">
+				<button class="btn btn-xs btn-danger pull-right" ng-click="removeProduct(editClient.id, product.id)"><span class="glyphicon glyphicon-minus"></span></button>
+				<strong>{{product.name}}</strong><br>
+				<em>{{product.serial || "no serial"}}</em>
+			</li>
+		</ul>
+	</div>
+
+	<div class="col-md-6">
+		<h4>Available Products</h4>
+		<input type="text" placeholder="Filter Products" class="form-control" ng-model="availableSearch.name" />
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="product in products.list | filter:filterAlreadyAdded() | filter:availableSearch:strict">
+				<button class="btn btn-xs btn-success pull-left" ng-click="addProduct(editClient.id, product.id)"><span class="glyphicon glyphicon-plus" ></span></button>
+				<strong style="margin-left:25px;">{{product.name}}</strong><br>
+				<em style="margin-left:25px;">{{product.serial || "no serial"}}</em>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -4,40 +4,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<span>Current Clients</span>
-			<button  class="pull-right btn btn-xs btn-success" data-toggle="modal" data-target="#newModal">ADD NEW</button>
-			<modal 
-				modal-id="newModal"
-				click-call="addNew" 
-				title-text="Create Client?" 
-				btn-view="view/addNewModalBtn.html">
-				
-				<h3>New Client</h3>
-
-				<form class="creatClientForm form-horizontal">
-					<div class="form-group">
-						<label for="clientInputName">Client Name:</label>
-						<input type="name" class="form-control" id="clientInputName" placeholder="Enter Client Name" ng-model="newClient.name">
-					</div>
-					<div class="form-group">
-						<label for="clientInputEmail">Email Address:</label>
-						<input type="email" class="form-control" id="clientInputEmail" placeholder="Enter Email Address" ng-model="newClient.email">
-					</div>
-					<div class="form-group">
-						<label for="clientInputPhone">Phone Number:</label>
-						<input type="phone" class="form-control" id="clientInputPhone" placeholder="Enter Phone Number" ng-model="newClient.phoneNumber">
-					</div>
-					<div class="form-group">
-						<label for="clientInputLocation">Location:</label>
-						<input type="address" class="form-control" id="clientInputLocation" placeholder="Enter Physical Address" ng-model="newClient.location">
-					</div>
-					<div class="form-group">
-						<label for="clientInputNotes">Notes:</label>
-						<textarea id="clientInputNotes" class="form-control" rows="3" ng-model="newClient.notes"></textarea>
-					</div>
-				</form>
-
-			</modal>
-
+			<button  class="pull-right btn btn-xs btn-success" data-toggle="modal" data-target="#newClientModal">ADD NEW</button>
 		</div>
 		<table class="table">
 			<thead>
@@ -53,7 +20,7 @@
 	        </thead>
 	        <tbody>
 				<tr ng-repeat="client in clients.list | orderBy:'id'">
-					<th scope="row"><a href="client/{{client.id}}">{{client.id }}</a></th>
+					<th scope="row"><a href="client/{{client.id}}">{{client.id}}</a></th>
 					<td ng-dblclick="editingName = true">
 						<span ng-hide="editingName">{{client.name}}</span>
 						<input type="text" placeholder="input name" ng-show="editingName" ng-model="client.name" class="form-control" ng-blur="editingName = false; update(client);" />
@@ -74,9 +41,9 @@
 						<a href="" ng-click="setEditClient(client)" class="badge" data-toggle="modal" data-target="#addProductsModal">{{client.allProducts.length}}</a>
 					</td>
 					<td class="tableActions">
-						<a class="btn btn-xs btn-info" href="client/{{client.id}}" ng-hide="editing"><span class="glyphicon glyphicon-search"></span></a>
-						<button class="btn btn-xs btn-warning" ng-hide="editing" data-toggle="modal" data-target="#editModal" ng-click="setUpdateClient(client)"><span class="glyphicon glyphicon-pencil" ></span></button>
-						<button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" ng-click="setDeleteId(client.id)" ng-hide="editing"><span class="glyphicon glyphicon-remove" ></span></button>
+						<a class="btn btn-xs btn-info" href="client/{{client.id}}"><span class="glyphicon glyphicon-search"></span></a>
+						<button class="btn btn-xs btn-warning" ng-hide="editing" data-toggle="modal" data-target="#editClientModal" ng-click="setUpdateClient(client)"><span class="glyphicon glyphicon-pencil" ></span></button>
+						<button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteClientModal" ng-click="setDeleteId(client.id)"><span class="glyphicon glyphicon-remove" ></span></button>
 					</td>
 				</tr>
 			</tbody>
@@ -84,6 +51,25 @@
 		</table>
 	</div>
 
+	<modal 
+		modal-id="newClientModal"
+		click-call="addNew" 
+		title-text="Create New Client" 
+		btn-view="view/createNewClientModalBtn.html">
+
+		<div ng-include src="'view/createClientModalContent.html'"></div>
+
+	</modal>
+
+	<modal 
+		modal-id="deleteClientModal" 
+		click-call="delete" 
+		title-text="Confirm Delete"
+		btn-view="view/deleteModalBtn.html">
+		
+		<h3>Are you sure you want to delete?</h3>
+		
+	</modal>
 
 
 	<modal 
@@ -91,59 +77,17 @@
 		click-call="addProduct" 
 		title-text="Add a product">
 		
-		<div class="row">
-			<div class="col-md-5">
-				<h4>Current Products</h4>
-				<ul class="list-group">
-					<li class="list-group-item" ng-repeat="product in editClient.allProducts"><strong>{{product.name}}</strong><br><em>{{product.serial || "no serial"}}</em></li>
-				</ul>
-			</div>
-
-			<div class="col-md-2">
-				<button class="btn btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span></button>
-				<button class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
-			</div>
-
-			<div class="col-md-5">
-				<h4>Available Products</h4>
-				<ul class="list-group">
-					<li class="list-group-item" ng-repeat="product in products.list | filter:byProducts"><strong>{{product.name}}</strong><br>{{product.serial || "no serial"}}</li>
-				</ul>
-			</div>
-		</div>
+		<span ng-include src="'view/addProductsModalContent.html'"></span>
 		
 	</modal>
 
 	<modal 
-		modal-id="editModal" 
+		modal-id="editClientModal" 
 		click-call="update" 
-		title-text="Update Client?" 
-		btn-view="view/editModalBtn.html">
+		title-text="Update Client" 
+		btn-view="view/editClientModalBtn.html">
 
-		<h3>Update Client</h3>
-
-		<form class="creatClientForm form-horizontal">
-			<div class="form-group">
-				<label for="clientInputName">Client Name:</label>
-				<input type="name" class="form-control" id="clientInputName" value="updateClient.name" placeholder="Enter Client Name" ng-model="updateClient.name" />
-			</div>
-			<div class="form-group">
-				<label for="clientInputEmail">Email Address:</label>
-				<input type="email" class="form-control" id="clientInputEmail" placeholder="Enter Email Address" ng-model="updateClient.email" value="updateClient.email" />
-			</div>
-			<div class="form-group">
-				<label for="clientInputPhone">Phone Number:</label>
-				<input type="phone" class="form-control" id="clientInputPhone" placeholder="Enter Phone Number" ng-model="updateClient.phoneNumber" value="updateClient.phoneNumber" />
-			</div>
-			<div class="form-group">
-				<label for="clientInputLocation">Location:</label>
-				<input type="address" class="form-control" id="clientInputLocation" placeholder="Enter Physical Address" ng-model="updateClient.location" value="updateClient.location" />
-			</div>
-			<div class="form-group">
-				<label for="clientInputNotes">Notes:</label>
-				<textarea id="clientInputNotes" class="form-control" rows="3" ng-model="updateClient.notes">{{updateClient.notes}}</textarea>
-			</div>
-		</form>
+		<span ng-include src="'view/editClientModalContent.html'"></span>
 		
 	</modal>
 

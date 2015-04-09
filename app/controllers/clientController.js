@@ -16,7 +16,7 @@ Minder.controller('ClientController', function ($scope, Clients, Client, Product
 
 		$http.get(url)
 		.success(function(res) {
-			$scope.clients = Clients.get();
+			$scope.clients = Clients.refresh();
 			$scope.newClient = {};
 		}); 
 	}
@@ -32,7 +32,7 @@ Minder.controller('ClientController', function ($scope, Clients, Client, Product
 
 		$http.get(url)
 		.success(function() {
-			$scope.clients = Clients.get("refresh");
+			$scope.clients = Clients.refresh();
 		}); 
 
 	}
@@ -48,24 +48,49 @@ Minder.controller('ClientController', function ($scope, Clients, Client, Product
 	$scope.delete = function(id) {
 		$http.get(globalConfig.webService+"/rest/client/"+id+"/delete")
 		.success(function(res) {
-			$scope.clients = Clients.get();
+			$scope.clients = Clients.refresh();
 		});
-	}
-
-	$scope.getDeleteId = function() {
-		return "hello";
 	}
 
 	$scope.setEditClient = function(client) {
 		$scope.editClient = client;
 	}
 
-	$scope.byProducts = function(candidate) {
+	$scope.filterAlreadyAdded = function() {
+        return function(item) {
+            for(clientKey in  $scope.clients.list) {
+            	for(var productkey in $scope.clients.list[clientKey].allProducts) {
+	            	if(item.id ==  $scope.clients.list[clientKey].allProducts[productkey].id) return false;
+	            }
+            }  
+            return true;
+        }
+    };
 
-		for(key in $scope.editClient.allProducts) {
-			if (candidate.id == $scope.editClient.allProducts[key].id) return false;
-			return true;
-		}
-	}
+    $scope.addProduct = function(clientId, productId) {
+
+    	var url = globalConfig.webService+"/rest/client/"+clientId+"/add?product="+productId;
+
+		$http.get(url)
+		.success(function(data) {
+			$scope.clients = Clients.refresh();
+			$scope.editClient = Client.getById(clientId);
+			$scope.products = Products.refresh();
+		});
+
+    }
+
+    $scope.removeProduct = function(clientId, productId) {
+
+    	var url = globalConfig.webService+"/rest/client/"+clientId+"/remove?product="+productId;
+
+		$http.get(url)
+		.success(function(data) {
+			$scope.clients = Clients.refresh();
+			$scope.editClient = Client.getById(clientId);
+			$scope.products = Products.refresh();
+		});
+    	
+    }
 
 });
